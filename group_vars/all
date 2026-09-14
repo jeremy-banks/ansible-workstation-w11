@@ -1,5 +1,7 @@
 global_delay: 60
 
+wsl_ubuntu_distro: Ubuntu-26.04
+
 bloatware_to_remove_appx:
   - "Clipchamp.Clipchamp"
   - "Microsoft.BingNews"
@@ -38,17 +40,17 @@ bloatware_to_remove_dism:
 software_to_install:
   - audacity
   - blender
+  - brave
   - dotnetfx
   - epicgameslauncher
-  - firefox
   - gimp
+  - k-litecodecpackmega
   - steam
-#  - unity
-#  - unity-hub
+  - ubisoft-connect
+  - unity-hub
   - vcredist140
   - vlc
   - vscode.install
-  - wsl-ubuntu-2004
 
 vcsode_extensions_to_install:
   - VisualStudioToolsForUnity.vstuc

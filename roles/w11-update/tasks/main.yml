@@ -16,7 +16,6 @@
   register: windows_updates
   until: not windows_updates.changed
   delay: '{{ global_delay }}'
-  notify: reboot windows
 
 - name: nvidia display driver
   win_chocolatey:
@@ -29,10 +28,20 @@
   delay: '{{ global_delay }}'
   notify: reboot windows
 
-- name: wsl2
+- name: install wsl2
   win_chocolatey:
     name: wsl2
     state: latest
+  notify: reboot windows
+
+- name: get installed wsl distros
+  win_command: wsl -l -q
+  register: wsl_distros
+  changed_when: false
+
+- name: install ubuntu if missing
+  win_command: wsl --install -d {{ wsl_ubuntu_distro }}
+  when: "'{{ wsl_ubuntu_distro }}' not in (wsl_distros.stdout | regex_replace('\\x00', ''))"
   notify: reboot windows
 
 - name: reboot
